@@ -1,0 +1,666 @@
+$bg: #459;
+$bg-ligter: lighten($bg, 8%);
+$txt: #dde;
+$light: #fff;
+$red: #c55;
+$disabled:  #696969;
+$yellow: #D7B253;
+$green: #449961;
+$me: $yellow;
+$modified: $green;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	&:focus {
+	    outline: none;
+	}
+	border: none;
+}
+
+html {
+	height: 100%;
+	font-size: 62.5%;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.6rem;
+	background: $txt;
+	-webkit-transition: opacity 1s;
+	transition: opacity 1s;
+
+    &.waiting {
+    	opacity: 0.9;
+		cursor: progress;
+    }
+}
+
+input {
+	background-color: $txt;
+	border-radius: 5px;
+	&:focus {
+	background-color: $light;
+
+	}
+}
+
+
+
+.container {
+	color: $txt;
+	width: 90%;
+	min-height: 100px;
+	background-color: $bg;
+	margin: 10px auto;
+	padding: 5px;
+	overflow: hidden;
+	border-radius: 5px;
+	-webkit-transition: background-color 300ms;
+	transition: background-color 300ms;
+
+	.dbError {
+		margin: 20px;
+	}
+
+
+	p {
+		text-align: center;
+	}
+
+	h1 {
+		font-size: 4.0rem;
+		text-align: center;
+		margin: 10px 0 20px 0;
+		padding: 5px;
+		$border: 2px solid $light;
+		border-top: $border;
+		border-bottom: $border;
+	}
+
+	h2 {
+		font-size: 2.5rem;
+		text-align: center;
+		margin: 5px;
+	}
+
+		h3 {
+			font-size: 2.0rem;
+			position: relative;
+			bottom: 20px;
+			span {
+				background-color: $bg;
+				padding: 0 20px;
+			}
+		}
+
+	.logged {
+		display: none;
+	}
+	.forms {
+	margin: 50px auto 0 auto;
+	position: relative;
+	width: 100%;
+	max-width: 1000px;
+
+	&>* {
+		display: none;
+	}
+
+
+	.error {
+		text-align: left;
+		margin-left: 10px;
+		color: $red;
+		font-weight: bold;
+		height: 0;
+		opacity: 0;
+		-webkit-transition: height 300ms;
+		transition: height 300ms;
+		&.visible {
+		-webkit-transition: opacity 900ms;
+		transition: opacity 900ms;
+		opacity: 1;
+		height: 40px;
+		
+		}
+	}
+	
+	form {
+		margin: 10px;
+		// width: 40%;
+		max-width: 400px;
+		border: 1px solid $txt;
+
+		input {
+			display: block;
+			font-size: 1.8rem;
+			margin: 7px 10px;
+			padding: 8px 10px;
+			color: $bg;
+			font-weight: bold;
+			-webkit-transition: background 200ms;
+			transition: background 200ms;
+		}
+
+		[type="submit"] {
+			margin-top: 20px;
+			padding: 5px 30px;
+			background: $red;
+			cursor: pointer;
+			&:hover {
+				background: $light;
+			}
+		}
+
+		.return {
+			background-color: $yellow;
+			&:hover {
+				background-color: $txt;
+			}
+		}
+		
+	}
+}
+
+	
+
+	// ---------- Views -----------
+
+	&[data-view='hide'] {
+		display: none;
+
+	}
+
+	// -----------
+	// -----------
+	// -----------
+	// BEGIN
+
+	&[data-view='begin'] {
+		div.begin {
+			display: block;
+		}
+
+		input[type="text"], input[type="password"]  {
+			width: 95%;
+
+		}
+
+		h3 span {
+			margin: 0 10px;
+		}
+
+		.login {
+			margin-top: 80px;
+		}
+
+	}
+
+	//  Logging floats left
+	@media (min-width: 700px) {
+
+			.forms {
+			border: 1px solid $txt;
+
+
+			form {
+				width: 40%;
+				border: 0;
+			}
+
+
+			 .login {
+			 	margin-top: 5px;
+				position: absolute;
+				top: 0;
+				right: 0;
+
+				h3 {
+					text-align: right;
+				}
+
+				[type="submit"] {
+				float: right;
+				}
+
+			}
+		}
+
+	}
+
+	// -----------
+	// -----------
+	// -----------
+	// -------------
+	// LOGGED
+
+	&[data-view='logged'] {
+
+		margin-bottom: 95px;
+
+		.forms {
+			display: none;
+		}
+		div.logged {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-pack: center;
+			    -ms-flex-pack: center;
+			        justify-content: center;
+			// min-width: 700px;
+			overflow-x: auto;
+
+
+
+			table.usersTable {
+			overflow-x: auto;
+			margin: 30px auto;
+			text-align: center;
+			table-layout: fixed;
+			width: 90%;
+			// min-width: 1300px;
+
+		  		// breaking:
+			  // ------------
+			  // ------------
+
+			/* These are technically the same, but use both */
+			overflow-wrap: break-word;
+			word-wrap: break-word;
+			-ms-word-break: break-all;
+			  /* This is the dangerous one in WebKit, as it breakthings wherever */
+			word-break: break-all;
+			/* Instead use this non-standard one: */
+			word-break: break-word;
+			  /* Adds a hyphen where the word breaks, if supportedNo Blink) */
+			-ms-hyphens: auto;
+			-moz-hyphens: auto;
+			-webkit-hyphens: auto;
+			hyphens: auto;
+			// ------------
+			  // ------------
+
+
+				border-collapse: collapse;
+				thead {
+					background-color: $txt;
+					color: $bg;
+				}
+				tbody {
+					color: $txt;
+					background-color: $bg;
+				}
+
+				tr[data-user-id="1"] {
+					display: none;
+				}
+				
+
+				th, td {
+					border: 1px solid rgba(255,255,255,0.1);
+					text-align: center;
+					padding: 2px;
+				} 
+
+
+			
+				form {
+					display: inline-block;
+					width: 100%;
+
+					
+				}
+
+				label {
+					display: inline-block;
+					width: 50%;
+					cursor: pointer;
+				}
+
+				@-webkit-keyframes gears {
+					0% {-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+					100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}
+				}
+
+				@keyframes gears {
+					0% {-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+					100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}
+				}
+
+				.gear {
+					cursor: pointer;
+					&:hover {
+						div {
+							background-color: $red;
+							-webkit-animation: gears 3s infinite;
+							        animation: gears 3s infinite;
+							-webkit-animation-timing-function: linear;
+							animation-timing-function: linear;
+						}
+					}
+
+				}
+
+				.gear div {
+					margin: 0 auto;
+					$size: 20px;
+					display: -webkit-box;
+					display: -ms-flexbox;
+					display: flex;
+					-webkit-box-pack: center;
+					    -ms-flex-pack: center;
+					        justify-content: center;
+					-webkit-box-align: center;
+					    -ms-flex-align: center;
+					        align-items: center;
+					box-sizing: content-box;
+					width: $size;
+					height: $size;
+					border-radius: 100%;
+					background-color: $yellow;
+					background-color: darken($txt, 20%);
+					border: $size/8 dashed $bg;
+
+					&:after {
+						content: "";
+						width: $size/2;
+						height: $size/2;
+						background-color: $bg;
+						border-radius: 100%;
+					}
+				}
+
+
+
+				tbody tr:nth-child(odd) {
+					background: $bg-ligter;
+					.gear > div {
+						border-color: $bg-ligter;
+						&:after {
+							background: $bg-ligter;
+						}
+					}
+				}
+
+				tbody tr.me {
+					font-weight: bold;
+					background-color: $me;
+
+					.gear > div {
+						border-color: $me;
+						&:after {
+							background: $me;
+						}
+					}
+				}
+
+				tbody tr.modified {
+					font-weight: bold;
+					background-color: $modified;
+
+					.gear > div {
+						border-color: $modified;
+						&:after {
+							background: $modified;
+						}
+					}
+				}
+
+				tbody tr:hover {
+					color: $bg;
+					background-color: $txt;
+					.gear > div {
+						border-color: $txt;
+						&:after {
+							background: $txt;
+						}
+					}
+				}
+				
+				td>div {
+					height: 100%;
+					width: 100%;
+				}
+
+				td:first-child {
+					display: -webkit-box;
+					display: -ms-flexbox;
+					display: flex;
+					-webkit-box-pack: center;
+					    -ms-flex-pack: center;
+					        justify-content: center;
+					-webkit-box-align: center;
+					    -ms-flex-align: center;
+					        align-items: center;
+				}
+
+		
+
+			}
+
+			.forms {
+				border: none;
+			}
+		}
+
+	// bottom menu
+		.fixedMenuContainer {
+			position: fixed;
+			width: 100%;
+			height: 85px;
+			bottom: 10px;
+			left: 0px;
+		}
+
+		.fixedMenu {
+			padding: 10px;
+			// border-radius: 20px;
+			width: 80.5%;
+			height: 100%;
+
+			margin: 0 auto;
+			position: relative;
+			
+			background-color: $bg;
+			color: $txt;
+
+		
+
+			
+
+			.toTheTop {
+				height: 50px;
+				width: 50px;
+
+				position: absolute;
+				right: 5px;
+				top: 5px;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: center;
+				    -ms-flex-pack: center;
+				        justify-content: center;
+				-webkit-box-align: center;
+				    -ms-flex-align: center;
+				        align-items: center;
+
+				.arrow {
+					$height: 40px;
+					$width: $height*5/6;
+				    display: inline-block;
+				    width: 0;
+				    height: 0;
+				    border-style: solid;
+				    border-width: 0 $width/2 $height $width/2;
+				    border-color: transparent transparent $bg transparent;
+				}
+
+			}
+
+			.toTheBottom {
+				@extend .toTheTop;
+				left: 5px;
+				.arrow {
+					-webkit-transform: rotate(180deg);
+					        transform: rotate(180deg);
+				}
+			}
+			box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+
+			.inner {
+				width: 80%;
+				margin: 0 auto;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: center;
+				    -ms-flex-pack: center;
+				        justify-content: center;
+
+				@media (max-width: 700px) {
+					button {
+						font-size: 0px;
+						color: transparent;
+						span {
+							font-size: 2.0rem;
+							color: $bg;
+							font-weight: bold;
+						}
+					}
+				}
+			}
+
+			button {
+				margin: 5px 10px;
+				background-color: $red;
+				padding: 5px 15px;
+				font-size: 1.6rem;
+				border-radius: 10px;
+				color: $bg;
+				font-weight: bold;
+				cursor: pointer;
+				-webkit-transition: background 200ms;
+				transition: background 200ms;
+
+				&:disabled {
+				background-color: $disabled;
+				cursor: default;
+				}
+
+				&:hover:not(:disabled) {
+					background: $light;
+				
+				}
+			}
+
+
+		}
+
+	}
+
+	// -------------
+	// -----------
+	// -----------
+	// -----------
+	// -------------
+	// ADDITIONAL
+
+	&[data-view='additional'] {
+
+		div.additional {
+			display: block;
+
+			.error {
+				margin-left: 40px;
+			}
+
+			form {
+				margin: 0 auto;
+
+				input {
+					width: 80%;
+					margin-left: auto;
+					margin-right: auto;
+
+				
+				}
+			}
+			
+
+			h3 {
+				margin: 0;
+				text-align: center;
+			}
+		}
+
+	}
+
+	// -------------
+	// -----------
+	// -----------
+	// -----------
+	// -------------
+	// NEW USER
+
+	&[data-view='newUser'] {
+
+		div.newUser {
+			display: block;
+			form {
+				margin: 0 auto;
+
+					input {
+						margin-right: auto;
+						margin-left: auto;
+					&:disabled, &:disabled:hover {
+					background-color: $disabled;
+					cursor: default;
+
+					}
+
+				}
+			}
+
+		
+		}
+
+	}
+
+
+	// -------------
+	// -----------
+	// -----------
+	// -----------
+	// -------------
+	// ENSURE
+	&[data-view='ensure'] {
+
+		div.ensure {
+			display: block;
+
+			.usersToDelete {
+				font-size: 1.8rem;
+				margin: 10px;
+				line-height: 150%;
+			}
+
+			form {
+				margin: 0 auto;
+				input {
+				margin: 15px auto;
+				}
+			
+			}
+
+		
+		}
+
+	}
+
+
+
+}

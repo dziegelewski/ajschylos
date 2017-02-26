@@ -1,0 +1,380 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none; }
+  *:focus {
+    outline: none; }
+
+html {
+  height: 100%;
+  font-size: 62.5%; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+  background: #dde;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s; }
+  body.waiting {
+    opacity: 0.9;
+    cursor: progress; }
+
+input {
+  background-color: #dde;
+  border-radius: 5px; }
+  input:focus {
+    background-color: #fff; }
+
+.container {
+  color: #dde;
+  width: 90%;
+  min-height: 100px;
+  background-color: #459;
+  margin: 10px auto;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 5px;
+  -webkit-transition: background-color 300ms;
+  transition: background-color 300ms; }
+  .container .dbError {
+    margin: 20px; }
+  .container p {
+    text-align: center; }
+  .container h1 {
+    font-size: 4.0rem;
+    text-align: center;
+    margin: 10px 0 20px 0;
+    padding: 5px;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff; }
+  .container h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 5px; }
+  .container h3 {
+    font-size: 2.0rem;
+    position: relative;
+    bottom: 20px; }
+    .container h3 span {
+      background-color: #459;
+      padding: 0 20px; }
+  .container .logged {
+    display: none; }
+  .container .forms {
+    margin: 50px auto 0 auto;
+    position: relative;
+    width: 100%;
+    max-width: 1000px; }
+    .container .forms > * {
+      display: none; }
+    .container .forms .error {
+      text-align: left;
+      margin-left: 10px;
+      color: #c55;
+      font-weight: bold;
+      height: 0;
+      opacity: 0;
+      -webkit-transition: height 300ms;
+      transition: height 300ms; }
+      .container .forms .error.visible {
+        -webkit-transition: opacity 900ms;
+        transition: opacity 900ms;
+        opacity: 1;
+        height: 40px; }
+    .container .forms form {
+      margin: 10px;
+      max-width: 400px;
+      border: 1px solid #dde; }
+      .container .forms form input {
+        display: block;
+        font-size: 1.8rem;
+        margin: 7px 10px;
+        padding: 8px 10px;
+        color: #459;
+        font-weight: bold;
+        -webkit-transition: background 200ms;
+        transition: background 200ms; }
+      .container .forms form [type="submit"] {
+        margin-top: 20px;
+        padding: 5px 30px;
+        background: #c55;
+        cursor: pointer; }
+        .container .forms form [type="submit"]:hover {
+          background: #fff; }
+      .container .forms form .return {
+        background-color: #D7B253; }
+        .container .forms form .return:hover {
+          background-color: #dde; }
+  .container[data-view='hide'] {
+    display: none; }
+  .container[data-view='begin'] div.begin {
+    display: block; }
+  .container[data-view='begin'] input[type="text"], .container[data-view='begin'] input[type="password"] {
+    width: 95%; }
+  .container[data-view='begin'] h3 span {
+    margin: 0 10px; }
+  .container[data-view='begin'] .login {
+    margin-top: 80px; }
+  @media (min-width: 700px) {
+    .container .forms {
+      border: 1px solid #dde; }
+      .container .forms form {
+        width: 40%;
+        border: 0; }
+      .container .forms .login {
+        margin-top: 5px;
+        position: absolute;
+        top: 0;
+        right: 0; }
+        .container .forms .login h3 {
+          text-align: right; }
+        .container .forms .login [type="submit"] {
+          float: right; } }
+  .container[data-view='logged'] {
+    margin-bottom: 95px; }
+    .container[data-view='logged'] .forms {
+      display: none; }
+    .container[data-view='logged'] div.logged {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      overflow-x: auto; }
+      .container[data-view='logged'] div.logged table.usersTable {
+        overflow-x: auto;
+        margin: 30px auto;
+        text-align: center;
+        table-layout: fixed;
+        width: 90%;
+        /* These are technically the same, but use both */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -ms-word-break: break-all;
+        /* This is the dangerous one in WebKit, as it breakthings wherever */
+        word-break: break-all;
+        /* Instead use this non-standard one: */
+        word-break: break-word;
+        /* Adds a hyphen where the word breaks, if supportedNo Blink) */
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        border-collapse: collapse; }
+        .container[data-view='logged'] div.logged table.usersTable thead {
+          background-color: #dde;
+          color: #459; }
+        .container[data-view='logged'] div.logged table.usersTable tbody {
+          color: #dde;
+          background-color: #459; }
+        .container[data-view='logged'] div.logged table.usersTable tr[data-user-id="1"] {
+          display: none; }
+        .container[data-view='logged'] div.logged table.usersTable th, .container[data-view='logged'] div.logged table.usersTable td {
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          text-align: center;
+          padding: 2px; }
+        .container[data-view='logged'] div.logged table.usersTable form {
+          display: inline-block;
+          width: 100%; }
+        .container[data-view='logged'] div.logged table.usersTable label {
+          display: inline-block;
+          width: 50%;
+          cursor: pointer; }
+@-webkit-keyframes gears {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@keyframes gears {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+        .container[data-view='logged'] div.logged table.usersTable .gear {
+          cursor: pointer; }
+          .container[data-view='logged'] div.logged table.usersTable .gear:hover div {
+            background-color: #c55;
+            -webkit-animation: gears 3s infinite;
+            animation: gears 3s infinite;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear; }
+        .container[data-view='logged'] div.logged table.usersTable .gear div {
+          margin: 0 auto;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          box-sizing: content-box;
+          width: 20px;
+          height: 20px;
+          border-radius: 100%;
+          background-color: #D7B253;
+          background-color: #9999cc;
+          border: 2.5px dashed #459; }
+          .container[data-view='logged'] div.logged table.usersTable .gear div:after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background-color: #459;
+            border-radius: 100%; }
+        .container[data-view='logged'] div.logged table.usersTable tbody tr:nth-child(odd) {
+          background: #5366b3; }
+          .container[data-view='logged'] div.logged table.usersTable tbody tr:nth-child(odd) .gear > div {
+            border-color: #5366b3; }
+            .container[data-view='logged'] div.logged table.usersTable tbody tr:nth-child(odd) .gear > div:after {
+              background: #5366b3; }
+        .container[data-view='logged'] div.logged table.usersTable tbody tr.me {
+          font-weight: bold;
+          background-color: #D7B253; }
+          .container[data-view='logged'] div.logged table.usersTable tbody tr.me .gear > div {
+            border-color: #D7B253; }
+            .container[data-view='logged'] div.logged table.usersTable tbody tr.me .gear > div:after {
+              background: #D7B253; }
+        .container[data-view='logged'] div.logged table.usersTable tbody tr.modified {
+          font-weight: bold;
+          background-color: #449961; }
+          .container[data-view='logged'] div.logged table.usersTable tbody tr.modified .gear > div {
+            border-color: #449961; }
+            .container[data-view='logged'] div.logged table.usersTable tbody tr.modified .gear > div:after {
+              background: #449961; }
+        .container[data-view='logged'] div.logged table.usersTable tbody tr:hover {
+          color: #459;
+          background-color: #dde; }
+          .container[data-view='logged'] div.logged table.usersTable tbody tr:hover .gear > div {
+            border-color: #dde; }
+            .container[data-view='logged'] div.logged table.usersTable tbody tr:hover .gear > div:after {
+              background: #dde; }
+        .container[data-view='logged'] div.logged table.usersTable td > div {
+          height: 100%;
+          width: 100%; }
+        .container[data-view='logged'] div.logged table.usersTable td:first-child {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center; }
+      .container[data-view='logged'] div.logged .forms {
+        border: none; }
+    .container[data-view='logged'] .fixedMenuContainer {
+      position: fixed;
+      width: 100%;
+      height: 85px;
+      bottom: 10px;
+      left: 0px; }
+    .container[data-view='logged'] .fixedMenu {
+      padding: 10px;
+      width: 80.5%;
+      height: 100%;
+      margin: 0 auto;
+      position: relative;
+      background-color: #459;
+      color: #dde;
+      box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75); }
+      .container[data-view='logged'] .fixedMenu .toTheTop, .container[data-view='logged'] .fixedMenu .toTheBottom {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center; }
+        .container[data-view='logged'] .fixedMenu .toTheTop .arrow, .container[data-view='logged'] .fixedMenu .toTheBottom .arrow {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 16.66667px 40px 16.66667px;
+          border-color: transparent transparent #459 transparent; }
+      .container[data-view='logged'] .fixedMenu .toTheBottom {
+        left: 5px; }
+        .container[data-view='logged'] .fixedMenu .toTheBottom .arrow {
+          -webkit-transform: rotate(180deg);
+          transform: rotate(180deg); }
+      .container[data-view='logged'] .fixedMenu .inner {
+        width: 80%;
+        margin: 0 auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center; }
+        @media (max-width: 700px) {
+          .container[data-view='logged'] .fixedMenu .inner button {
+            font-size: 0px;
+            color: transparent; }
+            .container[data-view='logged'] .fixedMenu .inner button span {
+              font-size: 2.0rem;
+              color: #459;
+              font-weight: bold; } }
+      .container[data-view='logged'] .fixedMenu button {
+        margin: 5px 10px;
+        background-color: #c55;
+        padding: 5px 15px;
+        font-size: 1.6rem;
+        border-radius: 10px;
+        color: #459;
+        font-weight: bold;
+        cursor: pointer;
+        -webkit-transition: background 200ms;
+        transition: background 200ms; }
+        .container[data-view='logged'] .fixedMenu button:disabled {
+          background-color: #696969;
+          cursor: default; }
+        .container[data-view='logged'] .fixedMenu button:hover:not(:disabled) {
+          background: #fff; }
+  .container[data-view='additional'] div.additional {
+    display: block; }
+    .container[data-view='additional'] div.additional .error {
+      margin-left: 40px; }
+    .container[data-view='additional'] div.additional form {
+      margin: 0 auto; }
+      .container[data-view='additional'] div.additional form input {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto; }
+    .container[data-view='additional'] div.additional h3 {
+      margin: 0;
+      text-align: center; }
+  .container[data-view='newUser'] div.newUser {
+    display: block; }
+    .container[data-view='newUser'] div.newUser form {
+      margin: 0 auto; }
+      .container[data-view='newUser'] div.newUser form input {
+        margin-right: auto;
+        margin-left: auto; }
+        .container[data-view='newUser'] div.newUser form input:disabled, .container[data-view='newUser'] div.newUser form input:disabled:hover {
+          background-color: #696969;
+          cursor: default; }
+  .container[data-view='ensure'] div.ensure {
+    display: block; }
+    .container[data-view='ensure'] div.ensure .usersToDelete {
+      font-size: 1.8rem;
+      margin: 10px;
+      line-height: 150%; }
+    .container[data-view='ensure'] div.ensure form {
+      margin: 0 auto; }
+      .container[data-view='ensure'] div.ensure form input {
+        margin: 15px auto; }
